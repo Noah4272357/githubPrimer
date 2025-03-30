@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-# Basic git operation
-git init
-git add 
-git commit
-git log
-git status
-=======
 ## 什么是github
 为开发者提供git仓库的托管服务,是共享代码的场所,吉祥物octocat
 
@@ -71,6 +63,7 @@ add .gitignore可以忽略不许管理的文件和目录
 add a license 添加许可协议
 大多数软件使用MIT许可协议：被授权人有权使用，复制，修改，合并，再授权和售卖软件的副本但在软件和所有副本中都必须包含版权声明和许可声明
 
+# git 命令
 ## 开发
 git clone将仓库克隆到开发环境中,将代码提交到此仓库再push到github中,代码就会公开
 ### git 基本操作
@@ -93,6 +86,11 @@ git diff <revision><filename>:显示某文件两版本之间差异
 git help <command>:获取帮助
 
 ### 分支
+git checkout -b name 创建分支并切换到该分支
+git checkout name 切换, -表示上一分支
+此时提交只会提交到当前分支
+git merge 合并分支 --no-ff name
+可以用git log --graph查看topic分支的内容
 并行开发时使用.现在软件开发一般会保留稳定分支,同时开发多个特性分支实现新功能.
 主干分支则是合并的原点.为在历史记录中记录下分支合并,需要创建合并提交,在merge中用
 --no-ff参数;git log --all --graph --decorate:可视化合并历史记录
@@ -127,6 +125,13 @@ git clone:从远端下载仓库,默认处于master分支下
 progit;learngitbranching;trygit
 
 # git数据模型
+git 是分散型版本管理系统
+
+注释：集中型与分散型的不同，集中型将仓库集中存放在服务器中，所以只存在一个仓库，
+但一但开发者的环境不能连接服务器，就无法获取最新的源代码，开发就无法进行。
+
+分散型将仓库fork给每一个用户，fork出的仓库和原仓库是两个不同的仓库，在通过push和pull更改仓库
+
 ## 快照
 git将顶级目录中的文件和文件夹称为集合，并通过一系列快照管理历史记录，git中文件被称作blob对象，即数据，目录则被称为树，快照则是被最总的最顶层的树
 
@@ -183,12 +188,12 @@ def load_reference(name_or_id):
 
 通常情况下，我们会想要指导我们当前所在的位置，并将其标记下来，这样我们创建新的快照的时候，就可以知道其相对位置，git中，当前位置的索引为HEAD
 
-# 仓库
+## 仓库
 即对象和引用，硬盘上，git仅存储对象和引用,所有git命令都对应着提交树的操作，例如增加对象，增删引用
 
 当输入指令时，可以思考该命令是如何对底层的数据结构进行操作的
 
-# 暂存区
+## 暂存区
 staging area , 允许指定下次快照中要包括的那些改动
 
 
@@ -198,92 +203,41 @@ staging area , 允许指定下次快照中要包括的那些改动
 
 
 
-# git 
-git 是分散型版本管理系统
-
-注释：集中型与分散型的不同，集中型将仓库集中存放在服务器中，所以只存在一个仓库，
-但一但开发者的环境不能连接服务器，就无法获取最新的源代码，开发就无法进行。
-
-分散型将仓库fork给每一个用户，fork出的仓库和原仓库是两个不同的仓库，在通过push和pull更改仓库
 
 
 
 
-## 分支
-git checkout -b name 创建分支并切换到该分支
-git checkout name 切换, -表示上一分支
-此时提交只会提交到当前分支
-git merge 合并分支 --no-ff name
-可以用git log --graph查看topic分支的内容
+# github工具
+shift+/查看快捷键
+用gist查看和管理没必要放入仓库中的代码片段
+对于仓库,watch后,后续的更新会显示在notification中,star则更类似于书签,fork是参与开发时使用.
+issue中有bug报告,功能添加,方向讨论等.
+文件中的blame按行显示最新提交信息
+仓库页面下按t,可以查找文件
 
+可以直接在url中/compare/a/b查看不同分支或不同时间的差别
 
+## Issue
+管理其系统称为bts(bug跟踪系统),用于开发者之间交流,
+可以用````python指定语言,提供高亮,将图片拖入即可显示,
+Issue可以添加label进行分类.milestone进行管理,例如还有几个issue需要实施.
+用tasklist语法可以创建需要打勾的项目,不用反复编辑issue文件.
+issue处理完毕后提交时以fix #issueindex 对应的issue就会被自动close
+issue添加源代码可以和pull request互用.
 
+## wiki
+适合多人共同编写文章,针对更新频率较高的文件进行文档汇总,其本身数据也在git中管理
+可以用clone获取wiki仓库,在本地编辑,并提交,push
 
+## network
+显示包括克隆仓库在内所有分支的提交
 
-### 1. **Clone the Repository Locally**
+## github pages
+github的一个仓库,可以用该仓库中的资料创建web页,发布仓库中软件信息,创建后会显示相应的url,主要用于托管静态html,由于可以绑定独立域名,常用octopress框架搭建博客
 
-First, you need to clone the GitHub repository to your local machine:
+# 与github相互协作的工具
+## hub命令
+封装了git命令的命令行工具,命令与git相同,(换为hub而已),部分写法可以更简洁.
 
-- **Using the Command Line:**
-  1. Open your terminal or command prompt.
-  2. Navigate to the directory where you want to clone the repository.
-  3. Use the `git clone` command followed by the repository URL:
-     ```bash
-     git clone https://github.com/username/repository.git
-     ```
-  4. Replace `username` and `repository` with the appropriate GitHub username and repository name.
-
-- **Using VSCode:**
-  1. Open VSCode.
-  2. Press `Ctrl + Shift + P` (or `Cmd + Shift + P` on Mac) to open the Command Palette.
-  3. Type and select **Git: Clone**.
-  4. Enter the URL of the repository and select a local folder to clone it to.
-
-### 2. **Open the Cloned Repository in VSCode**
-
-After cloning, you can open the repository:
-
-- **If you used the command line:**
-  1. Navigate to the cloned repository folder using the terminal.
-  2. Run the command:
-     ```bash
-     code .
-     ```
-  This command opens the current directory in VSCode.
-
-- **If you used VSCode to clone:**
-  1. You should already be in the repository. If you closed VSCode, you can open it again and use **File > Open Folder...** to navigate to the cloned repository folder.
-
-### 3. **Install the GitHub Pull Requests and Issues Extension (Optional)**
-
-For enhanced GitHub integration:
-
-1. Go to the Extensions view in VSCode by clicking on the Extensions icon in the Activity Bar on the side.
-2. Search for "GitHub Pull Requests and Issues" and install it.
-
-This extension allows you to manage pull requests and issues directly within VSCode.
-
-### 4. **Making Changes and Committing**
-
-After opening the repository, you can make changes:
-
-1. Make your edits in the code files.
-2. Save your changes.
-3. Use the Source Control view (click the Source Control icon in the Activity Bar) to stage and commit your changes.
-
-### 5. **Pushing Changes Back to GitHub**
-
-When you're ready to push your changes:
-
-1. In the Source Control view, click the "..." (More Actions) icon.
-2. Select **Push** to upload your local commits to the remote repository on GitHub.
-
-### Additional Tips
-
-- **Open a Remote Repository Directly**: If you want to open a repository directly from GitHub without cloning (especially useful for quick edits), you can use the GitHub Codespaces feature if it’s available for that repository.
-- **VSCode Settings**: Make sure you have Git installed and properly configured in VSCode settings for a seamless experience.
-
-If you have any specific questions or need clarification on any steps, feel free to ask!
-
-Notice: 用git clone时关闭vpn,否则可能需要指定代理窗口
->>>>>>> test
+## CI(持续集成)
+监视仓库,可以在开发者发送提交后立刻执行自动测试或构建.在现代软件开发中不可或缺,逐渐成为常识.
