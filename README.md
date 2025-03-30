@@ -1,2 +1,5 @@
-# githubPrimer
-This is a primer example for using github
+# Basic git operation
+git init
+git add 
+git commit
+git log
